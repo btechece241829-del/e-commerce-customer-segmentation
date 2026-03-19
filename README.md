@@ -5,7 +5,7 @@ A full end-to-end ML pipeline + interactive web dashboard for
 **E-Commerce Behavioural Customer Segmentation** using the Mall Customers dataset.
 
 Check Out 
-# https://customer-segmentation.up.railway.app/
+https://smartseg.up.railway.app/
 ---
 
 ## Project Structure
