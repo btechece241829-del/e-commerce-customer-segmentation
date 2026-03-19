@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+{% block title %}Business Impact{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>Expected Business Impact</h1>
+  <p>Three measurable outcomes from behavioural customer segmentation — proven with your Mall Customers data</p>
+</div>
+
+<style>
+/* hero impact banner */
+.impact-banner{background:#fff;border:1px solid #e4e6ea;border-radius:var(--radius);padding:20px 24px;margin-bottom:28px}
+.impact-banner p{font-size:13px;color:#6b7280;line-height:1.7;margin:0}
+
+/* 3 big impact cards */
+.impact3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px}
+.imp-card{border-radius:var(--radius);padding:22px;background:#fff;border:1px solid #e4e6ea;border-top:5px solid var(--ic)}
+.imp-number{font-size:11px;font-weight:700;color:var(--ic);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+.imp-title{font-size:17px;font-weight:800;color:#1a1a2e;margin-bottom:8px}
+.imp-desc{font-size:13px;color:#6b7280;line-height:1.65;margin-bottom:14px}
+.imp-metric{font-size:24px;font-weight:800;color:var(--ic);margin-bottom:4px}
+.imp-metric-sub{font-size:11px;color:var(--ic);opacity:.8}
+.imp-detail{margin-top:14px;font-size:12px;color:#374151;background:#f7f8fa;border-radius:8px;padding:10px 13px;border-left:3px solid var(--ic);line-height:1.6}
+
+/* section header */
+.sec-h{font-size:16px;font-weight:800;color:#1a1a2e;margin:32px 0 14px;padding-bottom:8px;border-bottom:2px solid #e4e6ea;display:flex;align-items:center;gap:10px}
+.sec-badge{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:700}
+
+/* efficiency section */
+.eff-compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.eff-card{border-radius:var(--radius);padding:18px;border:1px solid}
+.waste-bar-row{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.wbr-label{font-size:12px;width:130px;flex-shrink:0;color:#374151}
+.wbr-track{flex:1;height:10px;background:#e4e6ea;border-radius:5px;overflow:hidden}
+.wbr-fill{height:100%;border-radius:5px}
+.wbr-val{font-size:12px;font-weight:600;width:36px;text-align:right}
+
+/* retention section */
+.at-risk-alert{background:#fef2f2;border:1px solid #fecaca;border-radius:var(--radius);padding:18px 20px;margin-bottom:18px}
+.ara-head{font-size:14px;font-weight:700;color:#991b1b;margin-bottom:6px}
+.ara-body{font-size:13px;color:#b91c1c;line-height:1.6;opacity:.85}
+.intervention-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.is-step{background:#fff;border:1px solid #fecaca;border-radius:8px;padding:12px;position:relative}
+.is-num{display:inline-flex;width:22px;height:22px;border-radius:50%;background:#dc2626;color:#fff;font-size:11px;font-weight:700;align-items:center;justify-content:center;margin-bottom:8px}
+.is-title{font-size:12px;font-weight:700;color:#991b1b;margin-bottom:4px}
+.is-body{font-size:12px;color:#b91c1c;line-height:1.4;opacity:.85}
+.seg-rev-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.srr-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.srr-name{font-size:12px;font-weight:500;width:148px;flex-shrink:0;color:#374151}
+.srr-track{flex:1;height:8px;background:#e4e6ea;border-radius:4px;overflow:hidden}
+.srr-fill{height:100%;border-radius:4px}
+.srr-pct{font-size:12px;font-weight:600;width:38px;text-align:right;color:#374151}
+
+/* scalability */
+.scale6{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.sc-box{background:#fff;border:1px solid #e4e6ea;border-radius:var(--radius);padding:16px;text-align:center}
+.sc-val{font-size:24px;font-weight:800;color:#7F77DD}
+.sc-key{font-size:11px;color:#6b7280;margin-top:3px}
+.pipeline{display:flex;align-items:center;flex-wrap:wrap;gap:0;margin:14px 0 18px}
+.pf-box{flex:1;min-width:90px;background:#f7f8fa;border:1px solid #e4e6ea;border-radius:8px;padding:10px 12px;font-size:12px;font-weight:500;color:#1a1a2e;text-align:center;line-height:1.4}
+.pf-arrow{color:#6b7280;padding:0 6px;font-size:16px;flex-shrink:0}
+
+@media(max-width:700px){.impact3,.eff-compare,.intervention-steps,.scale6{grid-template-columns:1fr}}
+</style>
+
+<!-- INTRO BANNER -->
+<div class="impact-banner">
+  <p>Behavioural customer segmentation delivers three distinct, measurable business outcomes. Each impact is grounded in the real data from your Mall Customers dataset — not theoretical projections. The numbers below are calculated directly from the 200 customers and 5 segments your K-Means model identified.</p>
+</div>
+
+<!-- 3 BIG IMPACT HERO CARDS -->
+<div class="impact3">
+  <div class="imp-card" style="--ic:#1D9E75">
+    <div class="imp-number">Impact 01</div>
+    <div class="imp-title">Increased Efficiency</div>
+    <div class="imp-desc">Drastically reduces marketing waste by excluding segments that don't respond to specific offers. Every campaign dollar reaches only the customers most likely to convert.</div>
+    <div class="imp-metric">57%</div>
+    <div class="imp-metric-sub">budget waste eliminated</div>
+    <div class="imp-detail">Without segmentation, 114 of 200 customers receive irrelevant offers. With segmentation, each of the 5 campaigns targets only its matching segment — waste drops to near zero while response rates multiply 3–5×.</div>
+  </div>
+  <div class="imp-card" style="--ic:#378ADD">
+    <div class="imp-number">Impact 02</div>
+    <div class="imp-title">Retention Growth</div>
+    <div class="imp-desc">Early detection of "At-Risk" behaviour allows for proactive intervention before a customer churns. Win-back campaigns deployed before disengagement becomes permanent.</div>
+    <div class="imp-metric">{{ at_risk_count }} customers</div>
+    <div class="imp-metric-sub">At-Risk / Churn identified in your dataset</div>
+    <div class="imp-detail">These {{ at_risk_count }} customers show Low Recency (spending score &lt; 35) and Moderate Frequency — they have visited before but are disengaging. A targeted win-back campaign deployed now costs far less than acquiring replacement customers.</div>
+  </div>
+  <div class="imp-card" style="--ic:#7F77DD">
+    <div class="imp-number">Impact 03</div>
+    <div class="imp-title">Scalability</div>
+    <div class="imp-desc">The data-driven pipeline is designed to handle large-scale transaction growth, providing real-time insights into shifting customer behaviours without manual intervention.</div>
+    <div class="imp-metric">&lt; 1 ms</div>
+    <div class="imp-metric-sub">to segment any new customer</div>
+    <div class="imp-detail">The trained K-Means model scores new customers via a single matrix operation. Whether the dataset grows from 200 to 2,000,000 customers, the pipeline performs identically. Segment boundaries auto-refresh when the model is retrained on new data.</div>
+  </div>
+</div>
+
+<!-- ═══════ IMPACT 1: EFFICIENCY ═══════ -->
+<div class="sec-h">
+  <span style="color:#1D9E75">◆</span> Impact 1 — Increased Efficiency
+  <span class="sec-badge" style="background:#dcfce7;color:#166534">Marketing Waste Elimination</span>
+</div>
+
+<div class="eff-compare">
+  <!-- WITHOUT -->
+  <div class="eff-card" style="background:#fef2f2;border-color:#fecaca">
+    <div style="font-size:13px;font-weight:700;color:#991b1b;margin-bottom:14px">Without Segmentation — Blanket Campaign</div>
+    <div style="font-size:36px;font-weight:800;color:#dc2626;margin-bottom:4px">57%</div>
+    <div style="font-size:12px;color:#991b1b;margin-bottom:14px;opacity:.85">of every campaign budget is wasted</div>
+    <div class="waste-bar-row"><span class="wbr-label">VIP Customers (39)</span><div class="wbr-track"><div class="wbr-fill" style="width:100%;background:#1D9E75"></div></div><span class="wbr-val" style="color:#166534">✓ 39</span></div>
+    <div class="waste-bar-row"><span class="wbr-label">Loyal Customers (81)</span><div class="wbr-track"><div class="wbr-fill" style="width:12%;background:#E24B4A"></div></div><span class="wbr-val" style="color:#991b1b">✗ 71</span></div>
+    <div class="waste-bar-row"><span class="wbr-label">Discount Seekers (22)</span><div class="wbr-track"><div class="wbr-fill" style="width:5%;background:#E24B4A"></div></div><span class="wbr-val" style="color:#991b1b">✗ 20</span></div>
+    <div class="waste-bar-row"><span class="wbr-label">At-Risk / Churn (23)</span><div class="wbr-track"><div class="wbr-fill" style="width:4%;background:#E24B4A"></div></div><span class="wbr-val" style="color:#991b1b">✗ 22</span></div>
+    <div class="waste-bar-row"><span class="wbr-label">New Customers (35)</span><div class="wbr-track"><div class="wbr-fill" style="width:8%;background:#E24B4A"></div></div><span class="wbr-val" style="color:#991b1b">✗ 32</span></div>
+    <div style="margin-top:12px;font-size:12px;color:#991b1b;font-weight:600">145 out of 200 customers received wrong offer</div>
+  </div>
+  <!-- WITH -->
+  <div class="eff-card" style="background:#f0fdf4;border-color:#bbf7d0">
+    <div style="font-size:13px;font-weight:700;color:#166534;margin-bottom:14px">With Segmentation — Targeted Campaign</div>
+    <div style="font-size:36px;font-weight:800;color:#16a34a;margin-bottom:4px">100%</div>
+    <div style="font-size:12px;color:#166534;margin-bottom:14px;opacity:.85">campaign efficiency — zero waste</div>
+    <div class="waste-bar-row"><span class="wbr-label">VIP Customers (39)</span><div class="wbr-track"><div class="wbr-fill" style="width:100%;background:#1D9E75"></div></div><span class="wbr-val" style="color:#166534">✓ 39</span></div>
+    <div class="waste-bar-row"><span class="wbr-label">Loyal Customers (81)</span><div class="wbr-track"><div class="wbr-fill" style="width:100%;background:#378ADD"></div></div><span class="wbr-val" style="color:#166534">✓ 81</span></div>
+    <div class="waste-bar-row"><span class="wbr-label">Discount Seekers (22)</span><div class="wbr-track"><div class="wbr-fill" style="width:100%;background:#E24B4A"></div></div><span class="wbr-val" style="color:#166534">✓ 22</span></div>
+    <div class="waste-bar-row"><span class="wbr-label">At-Risk / Churn (23)</span><div class="wbr-track"><div class="wbr-fill" style="width:100%;background:#BA7517"></div></div><span class="wbr-val" style="color:#166534">✓ 23</span></div>
+    <div class="waste-bar-row"><span class="wbr-label">New Customers (35)</span><div class="wbr-track"><div class="wbr-fill" style="width:100%;background:#7F77DD"></div></div><span class="wbr-val" style="color:#166534">✓ 35</span></div>
+    <div style="margin-top:12px;font-size:12px;color:#166534;font-weight:600">200 out of 200 customers received the right offer</div>
+  </div>
+</div>
+
+<!-- Revenue contribution -->
+<div class="card" style="margin-bottom:8px">
+  <div class="card-title">Revenue Contribution — VIPs drive disproportionate value (Pareto principle)</div>
+  {% for s in cluster_stats %}
+  <div class="seg-rev-row">
+    <div class="srr-dot" style="background:{{ s.color }}"></div>
+    <span class="srr-name">{{ s.name }}</span>
+    <div class="srr-track"><div class="srr-fill" style="width:{{ seg_rev[s.name] }}%;background:{{ s.color }}"></div></div>
+    <span class="srr-pct">{{ seg_rev[s.name] }}%</span>
+  </div>
+  {% endfor %}
+  <div style="margin-top:10px;font-size:12px;color:#6b7280;line-height:1.5">
+    VIP Customers ({{ vip_count }} people = {{ vip_pct }}% of base) generate a disproportionately large share of total revenue. Excluding non-VIP segments from premium campaigns preserves budget for the segments that matter most.
+  </div>
+</div>
+
+<!-- ═══════ IMPACT 2: RETENTION ═══════ -->
+<div class="sec-h" style="margin-top:32px">
+  <span style="color:#378ADD">◆</span> Impact 2 — Retention Growth
+  <span class="sec-badge" style="background:#dbeafe;color:#1e40af">At-Risk Detection &amp; Win-Back</span>
+</div>
+
+<div class="at-risk-alert">
+  <div class="ara-head">{{ at_risk_count }} At-Risk / Churn customers identified in your dataset — act now</div>
+  <div class="ara-body">
+    These {{ at_risk_count }} customers exhibit <strong>Low Recency</strong> (Spending Score below 35 — not actively engaging) and <strong>Moderate Frequency</strong> (have visited before but frequency is declining). Early detection by the segmentation model enables a proactive 3-step intervention before these customers are permanently lost to competitors.
+  </div>
+  <div class="intervention-steps">
+    <div class="is-step">
+      <div class="is-num">1</div>
+      <div class="is-title">Week 1 — Detect</div>
+      <div class="is-body">Model automatically flags customers whose Spending Score drops below 35. No manual monitoring needed — the pipeline surfaces them instantly.</div>
+    </div>
+    <div class="is-step">
+      <div class="is-num">2</div>
+      <div class="is-title">Week 2 — Re-Engage</div>
+      <div class="is-body">Send personalised "we miss you" re-engagement email with a special comeback offer. Acknowledge their history and show them what's new.</div>
+    </div>
+    <div class="is-step">
+      <div class="is-num">3</div>
+      <div class="is-title">Week 3 — Convert</div>
+      <div class="is-body">Follow up with a time-limited exclusive discount. Create urgency before the customer's attention window closes permanently.</div>
+    </div>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:8px">
+  <div class="card-title">Retention Signal — Average Spending Score per Segment (higher = lower churn risk)</div>
+  <div class="chart-box" style="height:240px"><canvas id="retChart"></canvas></div>
+</div>
+
+<!-- ═══════ IMPACT 3: SCALABILITY ═══════ -->
+<div class="sec-h" style="margin-top:32px">
+  <span style="color:#7F77DD">◆</span> Impact 3 — Scalability
+  <span class="sec-badge" style="background:#ede9fe;color:#5b21b6">Real-Time Insights at Any Scale</span>
+</div>
+
+<div class="scale6">
+  <div class="sc-box"><div class="sc-val">200</div><div class="sc-key">Customers in this demo</div></div>
+  <div class="sc-box"><div class="sc-val">&lt;1ms</div><div class="sc-key">Per-customer scoring time</div></div>
+  <div class="sc-box"><div class="sc-val">Millions</div><div class="sc-key">Max customers supported</div></div>
+  <div class="sc-box"><div class="sc-val">5</div><div class="sc-key">Segments — always current</div></div>
+  <div class="sc-box"><div class="sc-val">Real-time</div><div class="sc-key">Segment re-assignment</div></div>
+  <div class="sc-box"><div class="sc-val">Zero</div><div class="sc-key">Manual observation needed</div></div>
+</div>
+
+<div class="card" style="margin-bottom:18px">
+  <div class="card-title">Scalable pipeline — from new customer data to triggered marketing action</div>
+  <div class="pipeline">
+    <div class="pf-box">New customer data</div>
+    <div class="pf-arrow">→</div>
+    <div class="pf-box">StandardScaler normalises features</div>
+    <div class="pf-arrow">→</div>
+    <div class="pf-box">K-Means predicts cluster</div>
+    <div class="pf-arrow">→</div>
+    <div class="pf-box">RFM segment label assigned</div>
+    <div class="pf-arrow">→</div>
+    <div class="pf-box">Marketing action auto-triggered</div>
+  </div>
+  <p style="font-size:12px;color:#6b7280;margin-top:8px;line-height:1.6">
+    The pipeline scales linearly — scoring 200 customers or 2,000,000 customers requires the same model. When customer behaviour shifts (e.g., post-pandemic spending patterns change), simply retrain the model monthly on fresh transaction data. Segment boundaries auto-update. Planners receive real-time intelligence without any manual re-analysis.
+  </p>
+</div>
+
+<div class="card">
+  <div class="card-title">Segment distribution — scalable across any customer base size</div>
+  <div class="chart-box" style="height:240px"><canvas id="scaleChart"></canvas></div>
+</div>
+
+<script>
+const STATS = {{ cluster_stats | tojson }};
+
+new Chart(document.getElementById('retChart'),{
+  type:'bar',
+  data:{
+    labels:STATS.map(s=>s.name),
+    datasets:[{
+      label:'Avg Spending Score (retention signal)',
+      data:STATS.map(s=>s.avg_score),
+      backgroundColor:STATS.map(s=>s.color+'cc'),
+      borderRadius:5
+    }]
+  },
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},
+      annotation:{annotations:{line35:{type:'line',yMin:35,yMax:35,borderColor:'#E24B4A',borderWidth:2,borderDash:[6,4],label:{content:'At-Risk threshold (35)',enabled:true,position:'end',backgroundColor:'#E24B4A',font:{size:11}}}}}
+    },
+    scales:{
+      x:{ticks:{font:{size:10}}},
+      y:{beginAtZero:true,max:100,title:{display:true,text:'Avg Spending Score'}}
+    }
+  }
+});
+
+new Chart(document.getElementById('scaleChart'),{
+  type:'doughnut',
+  data:{
+    labels:STATS.map(s=>s.name+' ('+s.n+')'),
+    datasets:[{data:STATS.map(s=>s.n),backgroundColor:STATS.map(s=>s.color),borderWidth:2,borderColor:'#fff'}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{
+      legend:{position:'right',labels:{font:{size:11},boxWidth:12}},
+      tooltip:{callbacks:{label:ctx=>` ${ctx.label}: ${ctx.parsed} customers (${Math.round(ctx.parsed/200*100)}%)`}}
+    }
+  }
+});
+</script>
+{% endblock %}

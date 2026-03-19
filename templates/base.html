@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}E-Commerce Behavioural Customer Segmentation {% endblock %} </title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #f7f8fa;
+      --card:     #ffffff;
+      --border:   #e4e6ea;
+      --text:     #1a1a2e;
+      --muted:    #6b7280;
+      --accent:   #378ADD;
+      --green:    #1D9E75;
+      --red:      #E24B4A;
+      --amber:    #BA7517;
+      --gray:     #888780;
+      --radius:   10px;
+      --shadow:   0 1px 4px rgba(0,0,0,.08);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      height: 54px;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-brand {
+      font-size: 16px; font-weight: 700;
+      color: var(--text); text-decoration: none;
+      margin-right: 32px; white-space: nowrap;
+    }
+    .nav-brand span { color: var(--accent); }
+    nav a {
+      color: var(--muted); text-decoration: none;
+      padding: 0 14px; height: 54px;
+      display: flex; align-items: center;
+      font-size: 13px; font-weight: 500;
+      border-bottom: 2px solid transparent;
+      transition: color .15s, border-color .15s;
+    }
+    nav a:hover  { color: var(--text); }
+    nav a.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    /* ── PAGE ── */
+    .page { max-width: 1200px; margin: 0 auto; padding: 28px 24px 60px; }
+
+    /* ── PAGE HEADER ── */
+    .page-header { margin-bottom: 24px; }
+    .page-header h1 { font-size: 22px; font-weight: 700; }
+    .page-header p  { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      box-shadow: var(--shadow);
+    }
+    .card-title {
+      font-size: 14px; font-weight: 600;
+      margin-bottom: 14px; color: var(--text);
+    }
+
+    /* ── METRIC CARDS ── */
+    .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap: 12px; margin-bottom: 24px; }
+    .metric-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; }
+    .metric-val  { font-size: 28px; font-weight: 700; color: var(--text); }
+    .metric-key  { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+    /* ── GRID ── */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 24px; }
+    @media (max-width: 760px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+
+    /* ── TABLE ── */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; padding: 9px 12px; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); border-bottom: 1px solid var(--border); }
+    td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
+    tr:last-child td { border: none; }
+    tr:hover td { background: #f9fafb; }
+
+    /* ── BADGE / PILL ── */
+    .pill {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 20px; white-space: nowrap;
+    }
+
+    /* ── FORM ── */
+    .form-group { margin-bottom: 16px; }
+    label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: .04em; }
+    input[type=number], input[type=text], select {
+      width: 100%; padding: 9px 12px;
+      border: 1px solid var(--border); border-radius: 8px;
+      font-size: 14px; color: var(--text);
+      background: #fff; outline: none;
+      transition: border-color .15s;
+    }
+    input:focus, select:focus { border-color: var(--accent); }
+    .btn {
+      display: inline-block; padding: 10px 24px;
+      background: var(--accent); color: #fff;
+      border: none; border-radius: 8px;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      transition: opacity .15s;
+    }
+    .btn:hover { opacity: .87; }
+    .btn-outline {
+      background: transparent; color: var(--accent);
+      border: 1.5px solid var(--accent);
+    }
+
+    /* ── ALERT ── */
+    .alert { padding: 12px 16px; border-radius: 8px; font-size: 13px; margin-bottom: 16px; }
+    .alert-danger  { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+    .alert-success { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+
+    /* ── FILTER ROW ── */
+    .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
+    .filter-btn {
+      font-size: 12px; padding: 5px 14px; border-radius: 20px;
+      border: 1px solid var(--border); background: #fff;
+      color: var(--muted); cursor: pointer; font-weight: 500;
+      text-decoration: none; transition: all .15s;
+    }
+    .filter-btn:hover  { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active { font-weight: 700; }
+
+    /* ── CHART CONTAINER ── */
+    .chart-box { position: relative; width: 100%; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="/"><span>◆</span> E-SEGMENT</a>
+  <a href="/"          class="{% if request.path == '/' %}active{% endif %}">Dashboard</a>
+  <a href="/customers" class="{% if request.path == '/customers' %}active{% endif %}">Customers</a>
+  <a href="/segments"  class="{% if request.path == '/segments' %}active{% endif %}">Segments</a>
+  <a href="/metrics"   class="{% if request.path == '/metrics' %}active{% endif %}">Model Metrics</a>
+  <a href="/rfm"       class="{% if request.path == '/rfm' %}active{% endif %}">RFM Metrics</a>
+  <a href="/impact"    class="{% if request.path == '/impact' %}active{% endif %}">Business Impact</a>
+  <a href="/predict"   class="{% if request.path == '/predict' %}active{% endif %}">Predict</a>
+</nav>
+
+<div class="page">
+  {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>
